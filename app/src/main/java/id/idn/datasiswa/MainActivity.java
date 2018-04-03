@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 popUp = new Dialog(MainActivity.this);
                 popUp.setContentView(R.layout.inputdata);
+                popUp.show();
 
                 edtName = findViewById(R.id.edtName);
                 edtAddress = findViewById(R.id.edtAddress);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 edtSex = findViewById(R.id.edtSex);
                 edtHomeTown = findViewById(R.id.edtHomeTown);
 
-                btnInsert = findViewById(R.id.btnInsert);
+                btnInsert = popUp.findViewById(R.id.btnInsert);
                 btnInsert.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -95,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertData() {
         final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Proses Data", "Mohon Ditunggu");
-
         ApiService apiService = InstanceRetrofit.getInstance();
         Call<ResponseCreateData> createDataCall = apiService.response_create_data(
             strName, strAddress, strSex, strHomeTown, strClass
         );
+
 
         createDataCall.enqueue(new Callback<ResponseCreateData>() {
             @Override
