@@ -14,13 +14,14 @@ import retrofit2.http.POST;
 // TODO This is EndPoint
 
 public interface ApiService {
+
     @GET("read_data.php")
     Call<ResponseReadData> response_read_data();
 
     @FormUrlEncoded
-    @POST("createdata.php")
+    @POST("create_data.php/")
     Call<ResponseCreateData> response_create_data(
-            @Field("nama") String nama,
+            @Field("name") String nama,
             @Field("address") String address,
             @Field("sex") String sex,
             @Field("hometown") String hometown,

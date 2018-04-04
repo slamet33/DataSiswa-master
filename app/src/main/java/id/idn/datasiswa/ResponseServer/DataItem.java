@@ -1,17 +1,25 @@
 package id.idn.datasiswa.ResponseServer;
 
+import com.google.gson.annotations.SerializedName;
+
 public class DataItem{
 
+	@SerializedName("hometown")
 	private String hometown;
 
+	@SerializedName("address")
 	private String address;
 
+	@SerializedName("sex")
 	private String sex;
 
+	@SerializedName("name")
 	private String name;
 
+	@SerializedName("id")
 	private String id;
 
+	@SerializedName("class")
 	private String jsonMemberClass;
 
 	public void setHometown(String hometown){

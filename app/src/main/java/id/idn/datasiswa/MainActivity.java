@@ -8,9 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         strSex = edtSex.getText().toString();
                         strHomeTown = edtHomeTown.getText().toString();
 
+                        Log.d("TAG", ""+strName);
+
                         if (TextUtils.isEmpty(strName) && TextUtils.isEmpty(strAddress) && TextUtils.isEmpty(strClass)
                                 && TextUtils.isEmpty(strHomeTown) && TextUtils.isEmpty(strSex)){
                             edtHomeTown.setError("Tidak Boleh Kosong!");
@@ -97,27 +98,23 @@ public class MainActivity extends AppCompatActivity {
     private void insertData() {
         final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Proses Data", "Mohon Ditunggu");
         ApiService apiService = InstanceRetrofit.getInstance();
-        Call<ResponseCreateData> createDataCall = apiService.response_create_data(
-            strName, strAddress, strSex, strHomeTown, strClass
-        );
-
-
+        Call<ResponseCreateData> createDataCall = apiService.response_create_data(strName, strAddress, strSex, strHomeTown, strClass);
         createDataCall.enqueue(new Callback<ResponseCreateData>() {
             @Override
             public void onResponse(Call<ResponseCreateData> call, Response<ResponseCreateData> response) {
-                if (response.body().isSukses()){
-                    Toast.makeText(MainActivity.this, ""+response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "" + response.body().isSukses());
+                if (response.body().isSukses()) {
+                    Toast.makeText(MainActivity.this, "" + response.body().getPesan(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    finish();
-                }else {
-                    Toast.makeText(MainActivity.this, ""+response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "" + response.body().getPesan(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseCreateData> call, Throwable t) {
                 dialog.dismiss();
-                Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Ini"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,13 +1,17 @@
 package id.idn.datasiswa.ResponseServer;
 
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class ResponseReadData{
 
+	@SerializedName("data")
 	private List<DataItem> data;
 
+	@SerializedName("success")
 	private boolean success;
 
+	@SerializedName("message")
 	private String message;
 
 	public void setData(List<DataItem> data){
