@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         view = findViewById(R.id.recyclerview);
         view.setLayoutManager(new LinearLayoutManager(this));
         getData();
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -139,4 +141,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Toast toast = new Toast(MainActivity.this);
+            toast.setText("Ini Move");
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            if (direction == ItemTouchHelper.RIGHT){
+                Toast.makeText(MainActivity.this, "Kekanan", Toast.LENGTH_SHORT).show();
+            } else if (direction == ItemTouchHelper.LEFT){
+                Toast.makeText(MainActivity.this, "KeKIRI", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }
