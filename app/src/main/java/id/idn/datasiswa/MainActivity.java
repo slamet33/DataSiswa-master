@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Dialog popUp;
     EditText edtName, edtAddress, edtHomeTown, edtSex, edtClass;
     String strName, strAddress, strHomeTown, strSex, strClass;
-    Button btnInsert;
+    Button btnInsert, btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,20 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
+                btnDelete = popUp.findViewById(R.id.btnDelete);
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                       deletedata();
+                    }
+                });
             }
         });
+    }
+
+    private void deletedata() {
+
     }
 
     private void insertData() {

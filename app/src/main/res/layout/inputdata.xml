@@ -35,13 +35,30 @@
         android:layout_height="wrap_content"
         android:hint="Class" />
 
-    <Button
-        android:id="@+id/btnInsert"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorPrimary"
-        android:text="Insert"
-        android:textColor="@android:color/white" />
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btnInsert"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Insert"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Delete"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 </LinearLayout>
