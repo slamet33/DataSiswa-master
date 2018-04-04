@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
                 popUp.setContentView(R.layout.inputdata);
                 popUp.show();
 
-                edtName = findViewById(R.id.edtName);
-                edtAddress = findViewById(R.id.edtAddress);
-                edtClass = findViewById(R.id.edtClass);
-                edtSex = findViewById(R.id.edtSex);
-                edtHomeTown = findViewById(R.id.edtHomeTown);
+                edtName = popUp.findViewById(R.id.edtName);
+                edtAddress = popUp.findViewById(R.id.edtAddress);
+                edtClass = popUp.findViewById(R.id.edtClass);
+                edtSex = popUp.findViewById(R.id.edtSex);
+                edtHomeTown = popUp.findViewById(R.id.edtHomeTown);
 
                 btnInsert = popUp.findViewById(R.id.btnInsert);
                 btnInsert.setOnClickListener(new View.OnClickListener() {

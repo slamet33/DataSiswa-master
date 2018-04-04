@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class InstanceRetrofit {
-    public static final String WebUrl = "http://192.168.70.30/phpcrud1/";
+     public static final String WebUrl = "http://192.168.10.23/phpcrud1/";
 
     public static Retrofit setInit() {
         return new Retrofit.Builder()
