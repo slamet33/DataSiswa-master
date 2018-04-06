@@ -1,7 +1,9 @@
 package id.idn.datasiswa.ApiRetrofit;
 
 import id.idn.datasiswa.ResponseServer.ResponseCreateData;
+import id.idn.datasiswa.ResponseServer.ResponseDeleteData;
 import id.idn.datasiswa.ResponseServer.ResponseReadData;
+import id.idn.datasiswa.ResponseServer.ResponseUpdateData;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -27,4 +29,22 @@ public interface ApiService {
             @Field("hometown") String hometown,
             @Field("class") String classs
     );
+
+    @FormUrlEncoded
+    @POST("delete_data.php")
+    Call<ResponseDeleteData> response_delete_data(
+            @Field("vsid") String id
+    );
+
+    @FormUrlEncoded
+    @POST("update_data.php")
+    Call<ResponseUpdateData> response_update_Data(
+            @Field("vsname") String nama,
+            @Field("vsaddress") String address,
+            @Field("vssex") String sex,
+            @Field("vshometown") String hometown,
+            @Field("vsclass") String classs,
+            @Field("vsid") String id
+
+            );
 }

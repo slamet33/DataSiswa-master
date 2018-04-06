@@ -6,37 +6,37 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/edtName"
+        android:id="@+id/edtNamed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name" />
 
     <EditText
-        android:id="@+id/edtAddress"
+        android:id="@+id/edtAddresssd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Address" />
 
     <EditText
-        android:id="@+id/edtSex"
+        android:id="@+id/edtSexd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Gender" />
 
     <EditText
-        android:id="@+id/edtHomeTown"
+        android:id="@+id/edtHomeTownd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Home Town" />
 
     <EditText
-        android:id="@+id/edtClass"
+        android:id="@+id/edtClassd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Class" />
 
     <Button
-        android:id="@+id/btnInsert"
+        android:id="@+id/btnInsertd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

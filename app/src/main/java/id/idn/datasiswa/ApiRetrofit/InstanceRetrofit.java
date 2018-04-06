@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InstanceRetrofit {
 
-    public static final String WebUrl = "http://192.168.10.20/phpcrud/";
+    public static final String WebUrl = "http://192.168.43.192/phpcrud/";
 
     public static Retrofit setInit() {
 //        Gson gson = new GsonBuilder()

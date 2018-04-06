@@ -3,6 +3,7 @@ package id.idn.datasiswa;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.idn.datasiswa.ApiRetrofit.ApiService;
 import id.idn.datasiswa.ApiRetrofit.InstanceRetrofit;
 import id.idn.datasiswa.ResponseServer.DataItem;
 import id.idn.datasiswa.ResponseServer.ResponseCreateData;
+import id.idn.datasiswa.ResponseServer.ResponseDeleteData;
 import id.idn.datasiswa.ResponseServer.ResponseReadData;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +35,12 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView view;
     Dialog popUp;
     EditText edtName, edtAddress, edtHomeTown, edtSex, edtClass;
-    String strName, strAddress, strHomeTown, strSex, strClass;
+    String strId, strName, strAddress, strHomeTown, strSex, strClass;
     Button btnInsert, btnDelete;
+    CustomAdapter adapter;
+    List<DataItem> dataItem = new ArrayList<>();
+
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO Inlitialize Widget to Variable
         view = findViewById(R.id.recyclerview);
+
+        refreshLayout = findViewById(R.id.swipeRefresh);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshingLayout();
+            }
+        });
+
         view.setLayoutManager(new LinearLayoutManager(this));
         getData();
 
@@ -94,20 +110,53 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                btnDelete = popUp.findViewById(R.id.btnDelete);
-                btnDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       deletedata();
-                    }
-                });
+//                btnDelete = popUp.findViewById(R.id.btnDelete);
+//                btnDelete.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                       deletedata();
+//                    }
+//                });
             }
         });
     }
 
-    private void deletedata() {
-
+    private void refreshingLayout() {
+        getData();
+        onItemsLoadComplete();
     }
+
+    private void onItemsLoadComplete() {
+        adapter = new CustomAdapter(MainActivity.this, dataItem);
+        view.setAdapter(adapter);
+        refreshLayout.setRefreshing(false);
+    }
+
+//    private void deletedata() {
+//        strId = CustomAdapter.id_data;
+//        final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Proses Delete", "Mohon Ditunggu");
+//        ApiService apiService = InstanceRetrofit.getInstance();
+//        Call<ResponseDeleteData> call = apiService.response_delete_data(strId);
+//        call.enqueue(new Callback<ResponseDeleteData>() {
+//            @Override
+//            public void onResponse(Call<ResponseDeleteData> call, Response<ResponseDeleteData> response) {
+//                boolean result = response.body().isResult();
+//                if (result){
+//                    Toast.makeText(MainActivity.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                } else {
+//                    Toast.makeText(MainActivity.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseDeleteData> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+//                dialog.dismiss();
+//            }
+//        });
+//    }
 
     private void insertData() {
         final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "Proses Data", "Mohon Ditunggu");
@@ -142,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 Boolean status = response.body().isSuccess();
                 if(status){
                     List<DataItem> dataItems = response.body().getData();
-                    CustomAdapter adapter = new CustomAdapter(MainActivity.this, dataItems);
+                    adapter = new CustomAdapter(MainActivity.this, dataItems);
                     view.setAdapter(adapter);
                 }
             }
