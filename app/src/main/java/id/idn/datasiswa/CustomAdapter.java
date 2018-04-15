@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     EditText edtName, edtAddress, edtClass, edtHomeTown, edtSex;
     String strName, strAddress, strClass, strHomeTown, strSex;
     String id_data;
-    public static final String WebUrl = "http:// ip komputer masing-masing / nama folder di htdocs";
+    public static final String WebUrl = "http://192.168.10.27/phpcrud/";
 
 
     public CustomAdapter(Context context, List<DataItem> dataItems) {
@@ -53,12 +56,18 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
+
+        final String url_image = WebUrl+"gambar/"+data.get(position).getImage();
         Log.d("RAM", "" + data.get(position).getAddress());
         id_data = data.get(position).getId();
         holder.name.setText(data.get(position).getName());
         holder.address.setText(data.get(position).getAddress());
         holder.gender.setText(data.get(position).getSex());
         holder.hometown.setText(data.get(position).getHometown());
+        Glide.with(context)
+                .load(url_image)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(holder.img);
         holder.classs.setText(data.get(position).getJsonMemberClass());
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -193,6 +202,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView classs, name, gender, hometown, address;
+        ImageView img;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -202,6 +212,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
             address = itemView.findViewById(R.id.address);
             hometown = itemView.findViewById(R.id.hometown);
             gender = itemView.findViewById(R.id.sex);
+            img = itemView.findViewById(R.id.image);
         }
     }
 }

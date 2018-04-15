@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class DataItem{
 
+	@SerializedName("image")
+	private String image;
+
 	@SerializedName("hometown")
 	private String hometown;
 
@@ -21,6 +24,14 @@ public class DataItem{
 
 	@SerializedName("class")
 	private String jsonMemberClass;
+
+	public void setImage(String image){
+		this.image = image;
+	}
+
+	public String getImage(){
+		return image;
+	}
 
 	public void setHometown(String hometown){
 		this.hometown = hometown;
@@ -74,7 +85,8 @@ public class DataItem{
  	public String toString(){
 		return 
 			"DataItem{" + 
-			"hometown = '" + hometown + '\'' + 
+			"image = '" + image + '\'' + 
+			",hometown = '" + hometown + '\'' + 
 			",address = '" + address + '\'' + 
 			",sex = '" + sex + '\'' + 
 			",name = '" + name + '\'' + 

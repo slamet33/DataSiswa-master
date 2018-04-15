@@ -4,11 +4,15 @@ import id.idn.datasiswa.ResponseServer.ResponseCreateData;
 import id.idn.datasiswa.ResponseServer.ResponseDeleteData;
 import id.idn.datasiswa.ResponseServer.ResponseReadData;
 import id.idn.datasiswa.ResponseServer.ResponseUpdateData;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by hp on 3/27/2018.
@@ -21,13 +25,13 @@ public interface ApiService {
     Call<ResponseReadData> response_read_data();
 
     @FormUrlEncoded
-    @POST("create_data.php/")
+    @POST("create_data.php")
     Call<ResponseCreateData> response_create_data(
-            @Field("name") String nama,
-            @Field("address") String address,
-            @Field("sex") String sex,
-            @Field("hometown") String hometown,
-            @Field("class") String classs
+            @Field("vsname") String nama,
+            @Field("vsaddress") String address,
+            @Field("vssex") String sex,
+            @Field("vshometown") String hometown,
+            @Field("vsclass") String classs
     );
 
     @FormUrlEncoded
@@ -44,7 +48,5 @@ public interface ApiService {
             @Field("vssex") String sex,
             @Field("vshometown") String hometown,
             @Field("vsclass") String classs,
-            @Field("vsid") String id
-
-            );
+            @Field("vsid") String id);
 }

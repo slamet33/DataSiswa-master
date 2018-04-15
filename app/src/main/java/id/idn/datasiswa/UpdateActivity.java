@@ -1,6 +1,7 @@
 package id.idn.datasiswa;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
 import id.idn.datasiswa.ApiRetrofit.ApiService;
 import id.idn.datasiswa.ApiRetrofit.InstanceRetrofit;
-import id.idn.datasiswa.ResponseServer.DataItem;
 import id.idn.datasiswa.ResponseServer.ResponseUpdateData;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,11 +35,11 @@ public class UpdateActivity extends AppCompatActivity {
         edtHomeTown = findViewById(R.id.edtHomeTownd);
         btnLatestUpdate = findViewById(R.id.btnInsertd);
 
-        edtName.setHint(getIntent().getStringExtra("name"));
-        edtHomeTown.setHint(getIntent().getStringExtra("hometown"));
-        edtClass.setHint(getIntent().getStringExtra("class"));
-        edtSex.setHint(getIntent().getStringExtra("sex"));
-        edtAddress.setHint(getIntent().getStringExtra("address"));
+        edtName.setText(getIntent().getStringExtra("name"));
+        edtHomeTown.setText(getIntent().getStringExtra("hometown"));
+        edtClass.setText(getIntent().getStringExtra("class"));
+        edtSex.setText(getIntent().getStringExtra("sex"));
+        edtAddress.setText(getIntent().getStringExtra("address"));
         btnLatestUpdate.setText("Update");
 
         btnLatestUpdate.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +50,7 @@ public class UpdateActivity extends AppCompatActivity {
 
                 strName = edtName.getText().toString();
                 strAddress = edtAddress.getText().toString();
-                strClass = edtHomeTown.getText().toString();
+                strClass = edtClass.getText().toString();
                 strSex = edtSex.getText().toString();
                 strHomeTown = edtHomeTown.getText().toString();
 
@@ -69,6 +67,7 @@ public class UpdateActivity extends AppCompatActivity {
                         if (response.body().isSukses()) {
                             Toast.makeText(UpdateActivity.this, "" + response.body().getPesan(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+                            startActivity(new Intent(UpdateActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(UpdateActivity.this, "" + response.body().getPesan(), Toast.LENGTH_SHORT).show();
                         }
